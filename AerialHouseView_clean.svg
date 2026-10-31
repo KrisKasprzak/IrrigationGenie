@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 528" width="960" height="528" font-family="Segoe UI,Helvetica,Arial,sans-serif">
+<rect width="960" height="528" fill="#0b1426"/>
+<polygon points="154.6,480.0 123.8,53.3 801.6,14.8 836.2,471.5 354.2,513.2" fill="#13261d" stroke="#3b5b4a" stroke-width="2"/>
+<polygon points="482.9,505.8 482.9,426.1 609.6,426.1 609.6,235.5 644.2,235.5 644.2,122.5 732.5,119.3 756.5,476.8" fill="#3987e5" fill-opacity="0.35" stroke="#3987e5" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="262.1,501.1 253.4,46.5 388.8,41.2 388.8,114.0 311.0,114.0 311.0,275.1 341.8,275.1 350.4,436.7 437.8,436.7 437.8,505.8 354.2,513.2" fill="#d95926" fill-opacity="0.35" stroke="#d95926" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="154.6,480.0 123.8,53.3 253.4,46.5 262.1,501.1" fill="#199e70" fill-opacity="0.35" stroke="#199e70" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="756.5,476.8 732.5,119.3 817.9,115.6 836.2,471.5" fill="#c98500" fill-opacity="0.35" stroke="#c98500" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="482.9,426.1 482.9,408.7 545.3,408.7 576.0,379.6 576.0,332.6 555.8,327.4 555.8,235.5 609.6,235.5 609.6,426.1" fill="#d55181" fill-opacity="0.35" stroke="#d55181" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="388.8,84.5 388.8,41.2 801.6,14.8 805.4,54.9" fill="#008300" fill-opacity="0.35" stroke="#008300" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="350.4,436.7 341.8,275.1 311.0,275.1 311.0,114.0 388.8,114.0 388.8,408.7 482.9,408.7 482.9,505.8 437.8,505.8 437.8,436.7" fill="#9085e9" fill-opacity="0.35" stroke="#9085e9" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="388.8,134.6 388.8,84.5 805.4,54.9 817.9,115.6" fill="#2b3442" stroke="#64748b" stroke-width="2"/>
+<polygon points="380.2,408.7 380.2,257.7 322.6,257.7 322.6,188.5 337.0,180.0 388.8,180.0 388.8,133.1 644.2,133.1 644.2,235.5 555.8,235.5 555.8,327.4 576.0,332.6 576.0,379.6 545.3,408.7" fill="#33415c" stroke="#9fb3c8" stroke-width="2.5" stroke-linejoin="round"/>
+<text x="482.88" y="273.64" fill="#cbd5e1" font-size="22" text-anchor="middle" font-weight="600">House</text>
+<text x="614.4" y="106.904" fill="#94a3b8" font-size="15" text-anchor="middle">Driveway</text>
+<circle cx="678.7199999999999" cy="370.65599999999995" r="17" fill="#3987e5" stroke="#fff" stroke-width="2.5"/><text x="678.7199999999999" y="377.65599999999995" fill="#fff" font-size="20" font-weight="700" text-anchor="middle">1</text>
+<circle cx="302.4" cy="335.808" r="17" fill="#d95926" stroke="#fff" stroke-width="2.5"/><text x="302.4" y="342.808" fill="#fff" font-size="20" font-weight="700" text-anchor="middle">2</text>
+<circle cx="203.51999999999998" cy="278.784" r="17" fill="#199e70" stroke="#fff" stroke-width="2.5"/><text x="203.51999999999998" y="285.784" fill="#fff" font-size="20" font-weight="700" text-anchor="middle">3</text>
+<circle cx="794.88" cy="346.368" r="17" fill="#c98500" stroke="#fff" stroke-width="2.5"/><text x="794.88" y="353.368" fill="#fff" font-size="20" font-weight="700" text-anchor="middle">4</text>
+<circle cx="593.28" cy="280.368" r="17" fill="#d55181" stroke="#fff" stroke-width="2.5"/><text x="593.28" y="287.368" fill="#fff" font-size="20" font-weight="700" text-anchor="middle">5</text>
+<circle cx="605.76" cy="44.352000000000004" r="17" fill="#008300" stroke="#fff" stroke-width="2.5"/><text x="605.76" y="51.352000000000004" fill="#fff" font-size="20" font-weight="700" text-anchor="middle">6</text>
+<circle cx="364.8" cy="332.64" r="17" fill="#9085e9" stroke="#fff" stroke-width="2.5"/><text x="364.8" y="339.64" fill="#fff" font-size="20" font-weight="700" text-anchor="middle">7</text>
+<g transform="translate(920,264)"><path d="M0,-34 L11,-8 L0,-14 L-11,-8 Z" fill="#22d3ee"/><text y="16" fill="#22d3ee" font-size="20" font-weight="700" text-anchor="middle">N</text></g>
+</svg>

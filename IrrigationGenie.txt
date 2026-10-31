@@ -1,0 +1,55 @@
+I want to build a very intelligent Home irrigation system that offers stanard day of week scheduling but an intelligent mode that is based on local weather forecast. The intelligent mode should reduce / eliminate watering during rain, or too little watering during very dry and hot times.
+
+Requirements
+
+1. ESP32 for WiFi connection
+2. 2.8" TFT for display with touch
+3. phone connection where a very modern look and experience is displayed
+4. zone control 1-7 + a master valve that is in series with all zones 
+5. master valve control
+6. winter mode (close main, open all to drain lines)
+7. If any pins left and one pin PWM output for audiable sounds (startup sounds, Click() for keypress, Warning if internet is lost, maybe others.)
+8. Phone graphics
+	a) map of zones
+	b) schedule setting a. b. or c from above
+	c) area for 30-day consumption--measured by on times
+	d) option to see my location, time zone, etc.
+9. Screen graphics: come up with screens to
+	a) intelligent watering
+	b) graphic of zones
+	c) ability to press zone and enter manual
+	d) press screen to enter time or DOW watering (if intelligent is off)
+	e) info screen for my location, time zone, etc.
+	e) 30-day consumption info
+10. Watering modes
+	a. Manual (user turns on / off zones as desired_
+	b. Automatic Tied to day of week
+	c. Intelligent: Tied to weather report (AI determine how to optimize based on temp/mumidity/forecast
+11. water usage monitoring
+12. screen and phone have aeral view of house with zone locations (no more guessing what zone 4 is)
+13. Screen calibration at start
+14. wifi setup from base unit
+15. Must get location from phone to get weather reports, time zones
+16. ESP keeps time but seeded with internet time, updated on startup and everyday at midnight--must know location to get DST and timezone
+17. screen saver after 1 min, shows time (or IP address) dancing around screen, touch to wake up
+18. wiring use standard SPI pins for screen and touch. 
+19. assing 8 outputs for master and zones 1-7
+
+
+Your job:
+Write the ESP32 code and web page code
+1. WiFi libraries are delivered with the ESP32
+2. Screen libraries C:\Arduino_Sketches\libraries\Adafruit_ILI9341
+2. Screen graphics libraries C:\Arduino_Sketches\libraries\Adafruit_GFX_Library
+3. font libraries C:\Arduino_Sketches\libraries\Adafruit_GFX_Library\Fonts
+4. touch libraries C:\Arduino_Sketches\libraries\XPT2046_Touchscreen
+5. example to get date and time "C:\__AI\IrrigationGenie\SuperClock_v2.0.ino"
+6. example to get weather data "C:\__AI\IrrigationGenie\SuperClock_v2.0.ino"
+7. JSON library C:\Arduino_Sketches\libraries\ArduinoJson-7.x
+8. suggested fonts
+#include "fonts\FreeSans18pt7b.h"   // fonts that deliver with Adafruit_GFX
+#include "fonts\FreeSans12pt7b.h"   // fonts that deliver with Adafruit_GFX
+#include "fonts\FreeSans9pt7b.h"    // fonts that deliver with Adafruit_GFX
+
+
+

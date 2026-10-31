@@ -1,0 +1,20 @@
+# Arduino build output (Sketch > Export Compiled Binary)
+build/
+*.elf
+*.bin
+*.map
+
+# screenshot tool dependencies
+node_modules/
+
+# personal files, not part of the project
+# (SuperClock is a reference sketch with WiFi credentials and a home location)
+SuperClock_v2.0.ino
+*- Copy*
+
+# editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

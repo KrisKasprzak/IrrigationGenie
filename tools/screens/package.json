@@ -1,0 +1,14 @@
+{
+  "name": "irrigationgenie-screens",
+  "private": true,
+  "description": "Screenshot generator for the IrrigationGenie TFT and phone UI",
+  "type": "module",
+  "scripts": {
+    "tft": "node build.mjs",
+    "phone": "node phone.mjs"
+  },
+  "dependencies": {
+    "@yowasp/clang": "^22.0.0-git20542-10",
+    "puppeteer-core": "^24.0.0"
+  }
+}
