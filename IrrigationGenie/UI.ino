@@ -28,6 +28,7 @@
 #define B_LOCIP 59
 #define B_BACK 60
 #define B_CLOCK 61
+#define B_HOMEZONE 62  // 62..68 manual zone grid on home
 #define B_POP_CLOSE 70
 #define B_POP_MINUS 71
 #define B_POP_PLUS 72
@@ -406,9 +407,64 @@ void DrawHome() {
 }
 
 // right card on home, redrawn every second while watering
+// manual mode: home card is a grid of all 7 zones + OFF, a tap opens the zone popup
+bool ManualGrid() {
+  return cfg.mode == MODE_MANUAL && !cfg.winter && !Draining;
+}
+
+void GridCell(int i, int &cx, int &cy) {
+  cx = 168 + 17 + (i % 4) * 35;
+  cy = 102 + (i / 4) * 50;
+}
+
+// one zone button; the label under it shows the time left while running
+void DrawGridZone(int i) {
+  int cx, cy;
+  GridCell(i, cx, cy);
+  char b[12];
+  Display.fillRect(cx - 17, cy - 16, 35, 46, C_CARD);
+  if (run[i].on) {
+    Display.drawCircle(cx, cy, 16, Pulse ? C_WHITE : C_ACCENT);
+    Display.fillCircle(cx, cy, 14, C_ACCENT);
+  } else {
+    Display.fillCircle(cx, cy, 14, ZONE_COLORS[i]);
+  }
+  b[0] = (char)('1' + i);
+  b[1] = 0;
+  TextCenter(&FONT_SMALL, cx, cy + 6, run[i].on ? C_BLACK : C_WHITE, b);
+  if (run[i].on) {
+    uint32_t left = ZoneSecondsLeft(i);
+    sprintf(b, "%d:%02d", (int)(left / 60), (int)(left % 60));
+    TextCenter(nullptr, cx, cy + 20, C_ACCENT, b);
+  }
+}
+
+void DrawManualGrid() {
+  int x = 164, y = 64;
+  Card(x, y, 148, 132);
+  TextAt(nullptr, x + 10, y + 8, AnyZoneOn() ? C_ACCENT : C_SUB, AnyZoneOn() ? "MANUAL - WATERING" : "MANUAL - TAP A ZONE");
+  for (int i = 0; i < NUM_ZONES; i++) {
+    DrawGridZone(i);
+    int cx, cy;
+    GridCell(i, cx, cy);
+    AddBtn(cx - 17, cy - 18, 35, 46, B_HOMEZONE + i);
+  }
+  // 8th cell: all off
+  int cx, cy;
+  GridCell(7, cx, cy);
+  bool on = AnyZoneOn() || MasterManual;
+  Display.fillCircle(cx, cy, 14, on ? C_BAD : C_CARD2);
+  TextCenter(nullptr, cx, cy - 3, on ? C_WHITE : C_MUTED, "OFF");
+  AddBtn(cx - 17, cy - 18, 35, 46, B_STOPALL);
+}
+
 void DrawHomeStatus() {
   char buf[48];
   int x = 164, y = 64, w = 148, h = 132;
+  if (ManualGrid()) {
+    DrawManualGrid();
+    return;
+  }
   Card(x, y, w, h);
 
   int z = RunningZone();
@@ -475,6 +531,13 @@ void DrawHomeStatus() {
 }
 
 void UpdateHome() {
+  if (ManualGrid()) {
+    // countdowns and pulse of running zones
+    for (int i = 0; i < NUM_ZONES; i++) {
+      if (run[i].on) DrawGridZone(i);
+    }
+    return;
+  }
   int z = RunningZone();
   if (Draining) {
     if (!cfg.drainMin) return;
@@ -1288,8 +1351,9 @@ void OnButton(int id, int16_t tx, int16_t ty) {
     DrawScreen();
     return;
   }
-  if (id >= B_ZONE && id < B_ZONE + NUM_ZONES) {
-    PopZone = id - B_ZONE;
+  if ((id >= B_ZONE && id < B_ZONE + NUM_ZONES) || (id >= B_HOMEZONE && id < B_HOMEZONE + NUM_ZONES)) {
+    // manual start works for every zone, enabled in the schedule or not
+    PopZone = id >= B_HOMEZONE ? id - B_HOMEZONE : id - B_ZONE;
     PopMinutes = cfg.manualMin;
     OpenPopup(POP_ZONE);
     return;

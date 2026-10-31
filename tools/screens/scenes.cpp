@@ -106,6 +106,20 @@ int main() {
   GoScreen(SCR_HOME);
   Dump("tft-home");
 
+  // manual mode: zone grid on the home card, zone 2 running
+  cfg.mode = MODE_MANUAL;
+  run[1].on = true;
+  run[1].source = SRC_MANUAL;
+  run[1].durMs = 900000;
+  run[1].startMs = g_millis - 141000;
+  ApplyOutputs();
+  Pulse = true;
+  GoScreen(SCR_HOME);
+  Dump("tft-manual");
+  memset(run, 0, sizeof(run));
+  ApplyOutputs();
+  cfg.mode = MODE_SMART;
+
   GoScreen(SCR_SMART);
   Dump("tft-smart");
 

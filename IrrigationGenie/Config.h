@@ -40,7 +40,19 @@
 #define NUM_OUTPUTS 8  // master + 7 zones
 
 // index 0 = master valve, 1..7 = zones. these pins do not glitch at boot
-const uint8_t OUTPUT_PINS[NUM_OUTPUTS] = { 32, 33, 25, 26, 27, 4, 16, 17 };
+// zone 6 = GPIO 12, zone 7 = GPIO 13 (moved from 16 / 17, which are now free; 16 / 17 are PSRAM on WROVER)
+// GPIO 12 is a boot strapping pin: it must not be pulled HIGH at power up. The 2N2222A driver
+// (1k to the base) keeps it low; do not add a pull-up on it
+const uint8_t OUTPUT_PINS[NUM_OUTPUTS] = {
+  32,  // master valve
+  33,  // zone 1
+  25,  // zone 2
+  26,  // zone 3
+  27,  // zone 4
+  4,   // zone 5
+  12,  // zone 6 (moved from 16, strapping pin, keep low at boot)
+  13   // zone 7 (moved from 17)
+};
 
 // false: each relay is driven by a 2N2222A (see docs/screenshots/Wiring.png), pin HIGH = relay on
 // true:  relay modules with active low inputs, pin LOW = relay on

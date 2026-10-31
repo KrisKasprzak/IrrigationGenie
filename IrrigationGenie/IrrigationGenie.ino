@@ -37,17 +37,17 @@
   36          T_IRQ
 
   ESP32     outputs (1k to a 2N2222A per relay, pin HIGH = relay on, relays switch 24VAC to the valves)
-  32          master valve
+  32          master valve (optional on some system, OK to turn this on even if house has no master valve)
   33          zone 1
   25          zone 2
   26          zone 3
   27          zone 4
   4           zone 5
-  16          zone 6       (WROVER modules use 16/17 for PSRAM, move zones 6/7 to 13 and 12)
-  17          zone 7
+  12          zone 6       (boot strapping pin, must not be pulled HIGH at power up)
+  13          zone 7       
   22          passive piezo buzzer (+ via 100 ohm, - to GND)
 
-  spare: 13 (output), 34, 35, 39 (input only, e.g. future flow meter / rain sensor)
+  spare: 16, 17 (output, not on WROVER: PSRAM), 34, 35, 39 (input only, e.g. future flow meter / rain sensor)
 
   phone: browse to http://irrigationgenie.local or the IP address shown on the info screen
 
@@ -119,9 +119,12 @@ volatile bool NetWantIPLocate = false;
 volatile bool NetWeatherReady = false;
 volatile bool NetLocateReady = false;
 volatile bool NetBusy = false;
+
 Weather NetWx;
+
 float NetLat, NetLon;
 int NetFailCount = 0;
+
 struct IPLocation {
   bool ok;
   float lat, lon;
@@ -162,6 +165,29 @@ void setup() {
   DrawSplash();
   SplashProgress(10, "Starting...");
   PlaySound(SND_STARTUP);
+
+  
+  for (int i = 0; i < 60; i++) {
+    ServiceSound();
+    delay(10);
+  }
+
+  /*
+  // ---- TEST ONLY: remove after the relays are checked ------------------------
+  // let the startup sound finish, then each zone on for 5 s with the master, 1 s off between
+  for (int z = 1; z <= NUM_ZONES; z++) {
+    char msg[32];
+    sprintf(msg, "Relay test: zone %d + master", z);
+    SplashProgress(z * 100 / NUM_ZONES, msg);
+    WriteOutput(0, true);   // master
+    WriteOutput(z, true);   // zone
+    delay(5000);
+    WriteOutput(z, false);
+    WriteOutput(0, false);
+    delay(1000);
+  }
+  // ---- end TEST ONLY ---------------------------------------------------------
+*/
 
   // touch calibration at start: always on first boot, or hold screen during splash
   SplashProgress(25, "Hold screen to calibrate");

@@ -14,7 +14,8 @@ in hot, dry spells.
 
 ## Features
 
-- **Three watering modes:** Manual, Schedule (2 start times, days of week, minutes per zone) and Smart
+- **Three watering modes:** Manual (tap any of the 7 zones on the home screen and pick a run time,
+  whether or not the zone is in the schedule), Schedule (2 start times, days of week, minutes per zone) and Smart
 - **Smart watering** from free [Open-Meteo](https://open-meteo.com) forecasts, no API key needed (see below)
 - **7 zones + master valve:** the master opens only while a zone runs; safety cutoff, one zone at a time by default
 - **Winter mode:** closes the master and opens every zone to drain the lines
@@ -43,6 +44,8 @@ All screens below are rendered from the actual firmware drawing code (see [Scree
 | Yard map, zone 3 running | Manual zone control | Schedule |
 | ![Usage](docs/screenshots/tft-usage.png) | ![Info](docs/screenshots/tft-info.png) | ![Settings](docs/screenshots/tft-settings.png) |
 | 30-day usage | Location, time zone, network | Settings |
+| ![Manual](docs/screenshots/tft-manual.png) | ![WiFi setup](docs/screenshots/tft-wifi.png) | ![Screen saver](docs/screenshots/tft-saver.png) |
+| Manual mode: tap any zone to run it | WiFi setup | Screen saver |
 
 ## Phone app
 
@@ -77,7 +80,7 @@ the eight relay driver stages, the buzzer and the backlight switch. Click the im
 | 21 | TFT backlight PWM, through a 2N3906 PNP (1 kΩ to the base, emitter to 3.3V, collector to TFT LED) |
 | 22 | piezo, through a 2N2222A (1 kΩ to the base) |
 | 32 | master valve relay |
-| 33, 25, 26, 27, 4, 16, 17 | zone 1..7 relays |
+| 33, 25, 26, 27, 4, 12, 13 | zone 1..7 relays |
 
 The output pins were chosen so the relays don't click during boot. Settings in
 [`Config.h`](IrrigationGenie/Config.h):
@@ -88,7 +91,9 @@ The output pins were chosen so the relays don't click during boot. Settings in
 - `CLICK_HZ` / `CLICK_MS`: pitch and length of the key click
 
 Never connect valves to the ESP32 directly. If touch is unreliable, disconnect the TFT's SDO (MISO) pin;
-the display doesn't need it. On WROVER modules GPIO 16/17 are used by PSRAM, so move zones 6/7.
+the display doesn't need it. GPIO 12 (zone 6) is a boot strapping pin: it must not be pulled HIGH at
+power-up, so don't add a pull-up to it (the transistor driver keeps it low). GPIO 16/17 are left free,
+which also keeps the design compatible with WROVER modules (PSRAM).
 
 ## Building
 
