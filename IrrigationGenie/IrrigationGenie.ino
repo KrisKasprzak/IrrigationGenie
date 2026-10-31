@@ -36,7 +36,7 @@
   19          T_DO
   36          T_IRQ
 
-  ESP32     outputs (relay board inputs, relays switch the 24VAC valve common)
+  ESP32     outputs (1k to a 2N2222A per relay, pin HIGH = relay on, relays switch 24VAC to the valves)
   32          master valve
   33          zone 1
   25          zone 2

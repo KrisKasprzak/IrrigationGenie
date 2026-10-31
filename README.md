@@ -55,8 +55,19 @@ All screens below are rendered from the actual firmware drawing code (see [Scree
 
 - ESP32 dev board (ESP32-WROOM-32)
 - 2.8" SPI TFT, ILI9341 with XPT2046 touch (the common red 240x320 module)
-- 8-channel relay board (master + 7 zones); the relays switch the 24 VAC valve transformer
+- 8 relays (master + 7 zones), each driven by a 2N2222A with a 1 kΩ base resistor and a flyback diode;
+  the relays switch 24 VAC to the valves
+- 24 VAC valve transformer, fused (5 A), powering two AC/DC buck converters for 3.3 V and 5 V
 - Passive piezo buzzer with a 2N2222A, and a 2N3906 for the backlight
+
+## Wiring
+
+<a href="docs/screenshots/Wiring.png"><img src="docs/screenshots/Wiring.png" width="100%" alt="IrrigationGenie schematic: ESP32, TFT, relay drivers, power supply, buzzer and backlight"></a>
+
+The full schematic: the 24 VAC supply and the 3.3 V / 5 V converters, the ESP32, the TFT and touch connections,
+the eight relay driver stages, the buzzer and the backlight switch. Click the image for full size.
+
+### Pin summary
 
 | ESP32 | Connects to |
 |---|---|
@@ -71,7 +82,8 @@ All screens below are rendered from the actual firmware drawing code (see [Scree
 The output pins were chosen so the relays don't click during boot. Settings in
 [`Config.h`](IrrigationGenie/Config.h):
 
-- `RELAY_ACTIVE_LOW`: most relay boards switch on with a LOW input
+- `RELAY_ACTIVE_LOW`: `false` for the transistor relay drivers in the schematic (HIGH = relay on);
+  `true` for relay modules with active-low inputs
 - `BL_ACTIVE_LOW`: backlight polarity; set it to match how your transistor is wired
 - `CLICK_HZ` / `CLICK_MS`: pitch and length of the key click
 

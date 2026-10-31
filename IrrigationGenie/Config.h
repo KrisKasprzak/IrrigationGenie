@@ -42,8 +42,9 @@
 // index 0 = master valve, 1..7 = zones. these pins do not glitch at boot
 const uint8_t OUTPUT_PINS[NUM_OUTPUTS] = { 32, 33, 25, 26, 27, 4, 16, 17 };
 
-// most relay boards turn on with a LOW input, set false for active high drivers
-#define RELAY_ACTIVE_LOW true
+// false: each relay is driven by a 2N2222A (see docs/screenshots/Wiring.png), pin HIGH = relay on
+// true:  relay modules with active low inputs, pin LOW = relay on
+#define RELAY_ACTIVE_LOW false
 
 // ---------------------------------------------------------------------------------
 // screen
