@@ -6,6 +6,11 @@ scheduling, it has a **Smart** mode that scales every run using the local weathe
 It waters less after rain or ahead of it, skips in freezing or windy weather, and waters more
 in hot, dry spells.
 
+<br>
+YouTube Video https://youtu.be/4rnn2PAPnI0
+<br>
+<br>
+
 <p align="center">
   <img src="docs/screenshots/phone-home.png" width="220" alt="Phone app home">
   <img src="docs/screenshots/phone-map.png" width="220" alt="Phone app yard map">
