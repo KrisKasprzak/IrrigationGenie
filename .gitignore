@@ -18,3 +18,8 @@ SuperClock_v2.0.ino
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# local video project files and IDE state
+YouTube/
+.theia/
+/IrrigationGenie_BOM.csv

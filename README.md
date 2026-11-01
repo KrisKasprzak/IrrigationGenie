@@ -64,6 +64,8 @@ All screens below are rendered from the actual firmware drawing code (see [Scree
   converters for 3.3 V (ESP32, TFT) and 5 V (relay coils)
 - Passive piezo buzzer with a 2N2222A, and a 2N3906 for the backlight
 
+Full parts list (with LCSC part numbers): [hardware/IrrigationGenie_BOM.csv](hardware/IrrigationGenie_BOM.csv)
+
 ## Wiring
 
 <a href="docs/screenshots/Wiring.png"><img src="docs/screenshots/Wiring.png" width="100%" alt="IrrigationGenie schematic: ESP32, TFT, relay drivers, power supply, buzzer and backlight"></a>
@@ -168,6 +170,7 @@ runs the schedule at 100%.
 | `IrrigationGenie/Plan.h` | default yard plan (generated) |
 | `tools/plan.js` | yard plan tracing; regenerates `Plan.h` and `AerialHouseView_clean.svg` |
 | `tools/screens/` | screenshot generators for the touch screen and phone app |
+| `hardware/IrrigationGenie_BOM.csv` | parts list (BOM) |
 | `docs/screenshots/` | the images in this README |
 
 ## Your own yard plan
