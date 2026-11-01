@@ -211,4 +211,12 @@ The ESP32 serves a small JSON API that the app uses, which is handy for home aut
 
 ## License
 
-[MIT](LICENSE)
+[PolyForm Noncommercial 1.0.0](LICENSE). Copyright (c) 2026 Kris Kasprzak.
+
+Free for personal, hobby, educational and other noncommercial use. Commercial use (selling it,
+building it into a product, or using it in a business) is not permitted without a separate license
+from the author.
+
+This project is provided **as is, without any warranty**. It switches mains-powered equipment and
+water valves; you build and use it at your own risk, and the author is not liable for any damage,
+flooding, water bills or other loss.

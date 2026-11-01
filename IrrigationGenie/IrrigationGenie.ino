@@ -3,6 +3,10 @@
   IrrigationGenie - intelligent home irrigation controller
   version 1.0
 
+  Copyright (c) 2026 Kris Kasprzak
+  License: PolyForm Noncommercial 1.0.0 (see LICENSE). Free for noncommercial use only.
+  Provided as is, without any warranty.
+
   ESP32 + 2.8" ILI9341 TFT with XPT2046 touch, 7 zones + master valve,
   manual / day-of-week schedule / weather intelligent watering, phone web app
 
