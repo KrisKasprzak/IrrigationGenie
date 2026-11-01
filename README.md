@@ -60,7 +60,8 @@ All screens below are rendered from the actual firmware drawing code (see [Scree
 - 2.8" SPI TFT, ILI9341 with XPT2046 touch (the common red 240x320 module)
 - 8 relays (master + 7 zones), each driven by a 2N2222A with a 1 kΩ base resistor and a flyback diode;
   the relays switch 24 VAC to the valves
-- 24 VAC valve transformer, fused (5 A), powering two AC/DC buck converters for 3.3 V and 5 V
+- 24 VAC valve transformer, fused (2 A slow blow), feeding an AC/DC converter and two CA-1235 buck
+  converters for 3.3 V (ESP32, TFT) and 5 V (relay coils)
 - Passive piezo buzzer with a 2N2222A, and a 2N3906 for the backlight
 
 ## Wiring
@@ -94,6 +95,19 @@ Never connect valves to the ESP32 directly. If touch is unreliable, disconnect t
 the display doesn't need it. GPIO 12 (zone 6) is a boot strapping pin: it must not be pulled HIGH at
 power-up, so don't add a pull-up to it (the transistor driver keeps it low). GPIO 16/17 are left free,
 which also keeps the design compatible with WROVER modules (PSRAM).
+
+### Power notes
+
+- **TFT at 3.3 V:** the red ILI9341 module has its own 3.3 V regulator on VCC. Solder the **J1** jumper on
+  the back of the display to bypass it, otherwise the display and touch run at about 2.9 V.
+- **ESP32 supply:** the ESP32 is powered through its 3V3 pin from the 3.3 V converter (VIN is unused).
+  Avoid plugging in USB while the 24 VAC supply is on, since the board's own regulator then drives the same
+  3.3 V rail. To flash, either unplug the 24 VAC or power VIN from the 5 V rail instead of 3V3.
+- **Converter polarity:** check the + / − markings on the AC/DC converter's DC output and wire + to In+ of
+  both CA-1235 converters. Their In− and Out− are common, so a reversed input also reverses GND.
+- **Fuse:** size it for your transformer; a typical 40 VA, 24 VAC transformer supplies about 1.7 A.
+  A slow blow fuse rides through the valve solenoids' inrush current.
+- The relay coils run from 5 V; the valves only ever see 24 VAC through the relays' normally open contacts.
 
 ## Building
 
