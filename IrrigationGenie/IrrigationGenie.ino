@@ -69,7 +69,6 @@
 #include <XPT2046_Touchscreen.h>
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"
-
 #include "fonts\FreeSans18pt7b.h"
 #include "fonts\FreeSans12pt7b.h"
 #include "fonts\FreeSans9pt7b.h"
@@ -252,6 +251,7 @@ void setup() {
 void loop() {
 
   server.handleClient();
+  
   ServiceSound();
   ServiceTouch();
   ServiceValves();

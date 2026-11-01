@@ -79,8 +79,8 @@ const uint8_t OUTPUT_PINS[NUM_OUTPUTS] = {
 
 #define MAX_PTS 12      // max polygon points per zone
 #define USAGE_DAYS 30
-#define WX_DAYS 6       // 2 past days + today + 3 forecast days
-#define WX_TODAY 2      // index of today in the weather arrays
+#define WX_DAYS 7       // 3 past days + today + 3 forecast days
+#define WX_TODAY 3      // index of today in the weather arrays
 
 #define NTP_SERVER1 "pool.ntp.org"
 #define NTP_SERVER2 "time.nist.gov"
@@ -178,6 +178,8 @@ struct Settings {
 
   // smart settings (all metric internally)
   float rainSkipMM;   // rain credit that cancels watering
+  uint8_t popSkip;    // skip if the day's chance of rain is above this %
+  uint8_t rainDays;   // skip after this many rain days in a row, 0 = off
   float freezeC;      // skip if low temp at or below
   float windSkipKmh;  // skip if max wind above, 0 = off
   uint8_t maxBoost;   // % max scaling

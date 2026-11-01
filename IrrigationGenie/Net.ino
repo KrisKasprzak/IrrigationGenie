@@ -8,7 +8,7 @@
                    "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum," \
                    "precipitation_probability_max,et0_fao_evapotranspiration,wind_speed_10m_max," \
                    "relative_humidity_2m_mean,sunrise,sunset" \
-                   "&timezone=auto&past_days=2&forecast_days=4&timeformat=unixtime"
+                   "&timezone=auto&past_days=3&forecast_days=4&timeformat=unixtime"
 
 #define IP_LOCATE "http://ip-api.com/json/?fields=status,city,regionName,countryCode,lat,lon,timezone,offset"
 

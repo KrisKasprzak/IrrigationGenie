@@ -43,12 +43,12 @@ static void SetupState() {
 
   // weather: 2 past days, today, 3 forecast days (local midnight epochs)
   time_t today = g_now - g_now % 86400;
-  const float hi[WX_DAYS] = { 29.1f, 30.4f, 31.2f, 30.0f, 33.4f, 26.6f };
-  const float lo[WX_DAYS] = { 17.2f, 18.0f, 19.4f, 16.1f, 14.0f, 15.8f };
-  const float rain[WX_DAYS] = { 0, 0.4f, 0, 0, 0, 6.5f };
-  const uint8_t pop[WX_DAYS] = { 0, 10, 15, 20, 10, 80 };
-  const float et0[WX_DAYS] = { 4.6f, 4.9f, 5.2f, 4.8f, 5.6f, 2.4f };
-  const uint8_t code[WX_DAYS] = { 0, 1, 2, 2, 0, 63 };
+  const float hi[WX_DAYS] = { 28.4f, 29.1f, 30.4f, 31.2f, 30.0f, 33.4f, 26.6f };
+  const float lo[WX_DAYS] = { 16.8f, 17.2f, 18.0f, 19.4f, 16.1f, 14.0f, 15.8f };
+  const float rain[WX_DAYS] = { 0, 0, 0.4f, 0, 0, 0, 6.5f };
+  const uint8_t pop[WX_DAYS] = { 0, 0, 10, 15, 20, 10, 80 };
+  const float et0[WX_DAYS] = { 4.4f, 4.6f, 4.9f, 5.2f, 4.8f, 5.6f, 2.4f };
+  const uint8_t code[WX_DAYS] = { 0, 0, 1, 2, 2, 0, 63 };
   wx.valid = true;
   wx.fetched = g_now - 600;
   wx.curTemp = 26.4f;

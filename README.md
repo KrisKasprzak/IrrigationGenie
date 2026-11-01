@@ -147,7 +147,8 @@ The minutes you set per zone are what the yard needs on a **hot, dry reference d
 2. Subtracts **rain credit**: effective rain of the last two days, plus expected rain today
    (amount × probability), plus half of tomorrow's.
 3. Adds small boosts for heat waves (≥ 35 °C) and very dry air.
-4. **Skips** the run for freeze risk, heavy recent or expected rain, strong wind, or when the result
+4. **Skips** the run when the day's chance of rain is above 5%, after 3 rain days in a row (each
+   at least 1 mm), for freeze risk, heavy recent or expected rain, strong wind, or when the result
    falls below the minimum (default 25%). The result is capped at the max boost (default 160%).
 
 The screen and the app always show the percentage and the reason, for example *"Rain credit, ET 0.21 in"*.

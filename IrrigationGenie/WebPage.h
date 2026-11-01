@@ -240,6 +240,8 @@ nav.tabs svg{width:24px;height:24px}
   <div class="card" id="smartCard">
     <h3>Smart watering</h3>
     <p class="small sub" style="margin-top:-4px">Run times below are for a hot, dry day. Each run is scaled by evapotranspiration (temperature, humidity, wind, sun) and credited for recent and expected rain.</p>
+    <div class="field"><label>Skip if chance of rain above</label><span class="v" id="vPop"></span></div><input type="range" id="sPop" min="0" max="100" step="5">
+    <div class="field"><label>Skip after rain days in a row</label><span class="v" id="vStreak"></span></div><input type="range" id="sStreak" min="0" max="3" step="1">
     <div class="field"><label>Rain skip</label><span class="v" id="vRain"></span></div><input type="range" id="sRain" min="2" max="25" step="0.5">
     <div class="field"><label>Freeze skip at or below</label><span class="v" id="vFreeze"></span></div><input type="range" id="sFreeze" min="-3" max="8" step="0.5">
     <div class="field"><label>Wind skip above</label><span class="v" id="vWind"></span></div><input type="range" id="sWind" min="0" max="80" step="2">
@@ -572,7 +574,7 @@ function renderSched(){
 }
 function schedTotals(){let t=0,g=0;D.zones.forEach((z,i)=>{$('#zv'+i).textContent=z.min?z.min+' min · '+VOL(z.min*z.gpm)+' '+VU():'off';if(z.en){t+=z.min;g+=z.min*z.gpm}});
   $('#totRun').textContent=t+' min · '+VOL(g)+' '+VU()}
-const SM=[['sRain','rainSkip',v=>RN(v)],['sFreeze','freeze',v=>T(v)],['sWind','windSkip',v=>v?WS(v):'off'],['sBoost','maxBoost',v=>v+'%'],['sMin','minPct',v=>v+'%'],['sEt','et0Ref',v=>RN(v)+'/day']];
+const SM=[['sPop','popSkip',v=>v+'%'],['sStreak','rainDays',v=>v?v+(v>1?' days':' day'):'off'],['sRain','rainSkip',v=>RN(v)],['sFreeze','freeze',v=>T(v)],['sWind','windSkip',v=>v?WS(v):'off'],['sBoost','maxBoost',v=>v+'%'],['sMin','minPct',v=>v+'%'],['sEt','et0Ref',v=>RN(v)+'/day']];
 function smartSliders(){SM.forEach(([id,k,f])=>{const r=$('#'+id);r.value=D[k];rangeFill(r);$('#v'+id.slice(1)).textContent=f(D[k]);
   r.oninput=()=>{D[k]=+r.value;draftDirty=true;rangeFill(r);$('#v'+id.slice(1)).textContent=f(D[k])}})}
 

@@ -386,7 +386,8 @@ int WxIndexFor(time_t t) {
 //   2. rain credit: effective rain of the last 2 days + expected rain today
 //      (amount x probability) + half of tomorrow's expected rain
 //   3. heat wave and very dry air nudges
-// and skipped for freeze risk, heavy rain, strong wind or too little demand
+// and skipped for freeze risk, a chance of rain above popSkip (default 5%), rainDays rain days
+// in a row (default 3), heavy rain, strong wind or too little demand
 // ---------------------------------------------------------------------------------
 
 float EffectiveRain(float mm) {
@@ -424,6 +425,26 @@ void ComputeSmart(int d, SmartResult &r) {
     r.skip = true;
     snprintf(r.reason, sizeof(r.reason), "Freeze risk, low %s", FmtTemp(low, buf));
     return;
+  }
+
+  // any real chance of rain on the day skips it (default: above 5%)
+  if (day.pop > cfg.popSkip) {
+    r.skip = true;
+    snprintf(r.reason, sizeof(r.reason), "Rain chance %d%%", day.pop);
+    return;
+  }
+
+  // several rain days in a row: give the yard a day off even if the day itself looks dry
+  if (cfg.rainDays > 0 && d >= cfg.rainDays) {
+    bool streak = true;
+    for (int k = 1; k <= cfg.rainDays; k++) {
+      if (wx.day[d - k].rain < 1.0f) streak = false;
+    }
+    if (streak) {
+      r.skip = true;
+      snprintf(r.reason, sizeof(r.reason), "%d rain days in a row", cfg.rainDays);
+      return;
+    }
   }
 
   if (credit >= cfg.rainSkipMM) {

@@ -17,6 +17,8 @@ void SetDefaults() {
   cfg.startMin[1] = 19 * 60;
 
   cfg.rainSkipMM = 6.0;
+  cfg.popSkip = 5;
+  cfg.rainDays = 3;
   cfg.freezeC = 2.0;
   cfg.windSkipKmh = 40.0;
   cfg.maxBoost = 160;
@@ -68,6 +70,8 @@ void ConfigToJson(JsonObject o, bool secrets) {
   }
 
   o["rainSkip"] = cfg.rainSkipMM;
+  o["popSkip"] = cfg.popSkip;
+  o["rainDays"] = cfg.rainDays;
   o["freeze"] = cfg.freezeC;
   o["windSkip"] = cfg.windSkipKmh;
   o["maxBoost"] = cfg.maxBoost;
@@ -138,6 +142,8 @@ void ConfigFromJson(JsonObjectConst o, bool secrets) {
   }
 
   if (o["rainSkip"].is<float>()) cfg.rainSkipMM = constrain(o["rainSkip"].as<float>(), 1.0f, 50.0f);
+  if (o["popSkip"].is<int>()) cfg.popSkip = constrain(o["popSkip"].as<int>(), 0, 100);
+  if (o["rainDays"].is<int>()) cfg.rainDays = constrain(o["rainDays"].as<int>(), 0, WX_TODAY);
   if (o["freeze"].is<float>()) cfg.freezeC = constrain(o["freeze"].as<float>(), -5.0f, 10.0f);
   if (o["windSkip"].is<float>()) cfg.windSkipKmh = constrain(o["windSkip"].as<float>(), 0.0f, 100.0f);
   if (o["maxBoost"].is<int>()) cfg.maxBoost = constrain(o["maxBoost"].as<int>(), 100, 250);
